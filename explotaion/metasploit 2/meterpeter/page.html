@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Meterpeter</title>
+</head><body><span style="font-size: 12pt"><u>Base Commands: </u><br/>
+? / help: Display a summary of commands <br/>
+exit / quit: Exit the Meterpreter session <br/>
+sysinfo: Show the system name and OS type <br/>
+shutdown / reboot: Self-explanatory <br/>
+<u>&nbsp;File System Commands:</u>&nbsp;<br/>
+cd: Change directory <br/>
+lcd: Change directory on local (attacker's) machine <br/>
+pwd / getwd: Display current working directory <br/>
+ls: Show the contents of the directory c<br/>
+at: Display the contents of a file on screen <br/>
+download / upload: Move files to/from the target machine <br/>
+mkdir / rmdir: Make / remove directory <br/>
+edit: Open a file in the default editor (typically vi) <br/>
+screenshare : Take ScreenShoot<br/>
+shell : get shell on victim machine<br/>
+<u>&nbsp;Proccess</u><br/>
+getpid: Display the process ID that Meterpreter is running inside <br/>
+getuid: Display the user ID that Meterpreter is running with <br/>
+getprivs : Display Permmistion i have on the box<br/>
+ps: Display process list <br/>
+kill: Terminate a process given its process ID <br/>
+execute: Run a given program with the privileges of the process the Meterpreter is loaded in <br/>
+migrate: Jump to a given destination process ID - Target process must have same or lesser privileges - Target process may be a more stable process - When inside a process, can access any files that process has a lock on <br/>
+idletime : ow much time users not in computers <br/>
+<u>Network Commands:</u>&nbsp;<br/>
+ipconfig: Show network interface information <br/>
+portfwd: Forward packets through TCP session <br/>
+route: Manage/view the system's routing table<br/>
+arp : Display arpp table to find addtional computers<br/>
+netstat : Show scokets on the victim machine<br/>
+<u>Additional Modules: </u><br/>
+use [module]: Load the specified module &nbsp; &nbsp; <br/>
+Example: &nbsp; &nbsp; &nbsp; &nbsp; use priv: Load the priv module &nbsp; &nbsp; &nbsp; &nbsp; <br/>
+hashdump: Dump the hashes from the box &nbsp; &nbsp; &nbsp; &nbsp; <br/>
+timestomp:Alter NTFS file timestamps <br/>
+show advanced: Show advanced confuguration<br/>
+<br/>
+<br/>
+</span></body></html>

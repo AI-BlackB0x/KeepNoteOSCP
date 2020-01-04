@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Nmap</title>
+</head><body><br/>
+<span style="font-size: 19pt"><u>#scan metodoloy recommended</u><br/>
+1. nmap -n -vv -Pn -T4 --randomize-hosts -p- &nbsp;&lt;ip address&gt;<br/>
+2. nmap -n -vv -Pn -T4 --andomize-hosts -p &lt;all ports found in perv scan&gt; -A &lt;ip address&gt;<br/>
+3. for each service found run spesific nse script as requierd<br/>
+<br/>
+<u># scan TCP all ports</u><br/>
+nmap -n -vv -p- -Pn -T4 -O -sSV | tee scan.txt<br/>
+<u># scan UDP</u><br/>
+nmap -n -vv -Pn -T4 -sU &nbsp;--reason <br/>
+<br/>
+<u># Ping Scan </u><br/>
+nmap -T4 -sn -n 192.168.1.0/24 -vv &nbsp;| grep "Nmap scan" | cut -d" " -f5 &nbsp; //Ping Scan<br/>
+<br/>
+#Scan with random order <br/>
+<img src="image 2.png" width="500" height="89" /><br/>
+<br/>
+#NSE scripts <br/>
+locate *.nse <br/>
+https://nmap.org/nsedoc/ - NSE Docs<br/>
+https://github.com/scipag/vulscan - Addistional NSE scripts for nmap <br/>
+https://github.com/OCSAF/freevulnsearch - Addistional NSE scripts for nmap <br/>
+https://github.com/vulnersCom/nmap-vulners<br/>
+<br/>
+nmap --script "vuln,exploit" -vv 192.168.50.31 -sV -O --max-os-tries 1 //Scan for exploit<br/>
+nmap --script=vulscan.nse -sV //Script for search vulnerabillity<br/>
+<br/>
+<br/>
+<br/>
+<img src="image.png" width="650" height="249" /><br/>
+<br/>
+<br/>
+</span><span style="font-size: 22pt"><br/>
+<br/>
+</span></body></html>
