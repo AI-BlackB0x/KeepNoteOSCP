@@ -1,7 +1,7 @@
 # Welcome to OSCP KeepNote
 
 this KeepNote is an open Source Note 
-this Help you with OSCP Exam 
+Help you with OSCP Exam 
 
 ## Installation
 
