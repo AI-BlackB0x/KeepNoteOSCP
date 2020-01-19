@@ -4,12 +4,12 @@
 <dict>
   <key>title</key><string>LinuxPrivilegeEscalation</string>
   <key>nodeid</key><string>510d30e2-fc59-4d33-ab4a-3abbc26a3872</string>
-  <key>modified_time</key><integer>1578142200</integer>
+  <key>modified_time</key><integer>1579358279</integer>
   <key>version</key><integer>6</integer>
   <key>content_type</key><string>text/xhtml+xml</string>
   <key>created_time</key><integer>1578142115</integer>
   <key>info_sort_dir</key><integer>1</integer>
-  <key>order</key><integer>4</integer>
+  <key>order</key><integer>5</integer>
   <key>info_sort</key><string>order</string>
 </dict>
 </node>

