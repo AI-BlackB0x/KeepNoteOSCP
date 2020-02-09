@@ -1,11 +1,15 @@
-# Welcome to OSCP KeepNote
+# Welcome to OSCP Notes
 
-this KeepNote is an open Source Note 
+A hierarchical note taking application, 
+featuring rich text and syntax highlighting, storing data in a single xml or sqlite file.
 Help you with OSCP Exam 
 
 ## Installation
 
 git clone https://github.com/AI-BlackB0x/KeepNoteOSCP.git
 
-## Where to download keepNote app
-http://keepnote.org
+## Where to download CheeryTree app
+https://www.giuspen.com/cherrytree/
+
+
+
